@@ -19,6 +19,11 @@ const TodoForm = () => {
         dispatch({ type: 'TOGGLE_COMPLETE', payload: todo });
     }
 
+    const clearCompleted = evt => {
+        evt.preventDefault();
+        dispatch({ type: 'CLEAR_COMPLETED', payload: true })
+    }
+
     return (
         <div>
             <input type="text" value={input} onChange={evt => setInput(evt.target.value)} />
@@ -33,6 +38,7 @@ const TodoForm = () => {
                     </div>
                 )}
             </div>
+            <button onClick={evt => clearCompleted(evt)}>CLEAR COMPLETED TODOS</button>
         </div>
     )
 }
