@@ -12,14 +12,9 @@ export const reducer = (state, action) => {
                 todos: [...state.todos, newTodo]
             };
         case 'TOGGLE_COMPLETE':
-            const todo = state.todos.filter(todo => todo.id === action.payload.id);
-            const updatedTodo = {
-                ...todo,
-                completed: !action.payload.completed
-            }
             return {
                 ...state,
-                todos: [...state.todos, updatedTodo]
+                todos: state.todos.map(todo => todo.id === action.payload.id ? { ...todo, completed: !todo.completed } : todo)
             }
         case 'EDIT_TODO':
             return state;

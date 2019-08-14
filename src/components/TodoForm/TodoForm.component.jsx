@@ -16,7 +16,7 @@ const TodoForm = () => {
 
     const toggleComplete = (evt, todo) => {
         evt.preventDefault();
-        dispatch({ type: 'TOGGLE_COMPLETE', payload: todo })
+        dispatch({ type: 'TOGGLE_COMPLETE', payload: todo });
     }
 
     return (
@@ -25,8 +25,11 @@ const TodoForm = () => {
             <button onClick={evt => addTodo(evt, input)}>ADD TODO</button>
             <div>
                 {todos.map(todo =>
-                    <div key={todo.id} onClick={evt => toggleComplete(evt, todo)} className='todo'>
-                        <p key={todo.id} className={todo.completed ? 'completed' : 'not-completed'}>{todo.item}</p>
+                    <div
+                        key={todo.id}
+                        onClick={evt => toggleComplete(evt, todo)}
+                        className={`${todo.completed ? 'completed' : 'not-completed'} todo`}>
+                        <p key={todo.id} >{todo.item}</p>
                     </div>
                 )}
             </div>
