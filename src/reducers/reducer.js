@@ -1,13 +1,26 @@
-import { switchCase } from "@babel/types";
-
 // reducer function 
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
     switch (action.type) {
         case 'ADD_TODO':
+            const newTodo = {
+                item: action.payload,
+                id: Date.now(),
+                completed: false
+            };
             return {
                 ...state,
-                name: action.payload
+                todos: [...state.todos, newTodo]
             };
+        case 'TOGGLE_COMPLETE':
+            const todo = state.todos.filter(todo => todo.id === action.payload.id);
+            const updatedTodo = {
+                ...todo,
+                completed: !action.payload.completed
+            }
+            return {
+                ...state,
+                todos: [...state.todos, updatedTodo]
+            }
         case 'EDIT_TODO':
             return state;
         case 'DELETE_TODO':
@@ -17,7 +30,7 @@ const reducer = (state, action) => {
     };
 };
 
-const state = {
+export const initialState = {
     todos: [
         {
             item: 'Learn about reducers',
